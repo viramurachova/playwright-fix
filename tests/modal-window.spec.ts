@@ -1,6 +1,6 @@
 import { test, expect, Page } from '@playwright/test';
-import {ModalPage} from '../pages/ModalPage';
-import {MainPage} from '../pages/MainPage';
+import { ModalPage } from '../app/pages/ModalPage';
+import { MainPage } from '../app/pages/MainPage';
 
 test.describe('Zara user journey: from cookie modal to registration', () => {
   test.beforeEach(async ({ page }) => {

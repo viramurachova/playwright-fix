@@ -9,7 +9,7 @@ export class ModalPage {
     modalWindow: Locator;
     goButton: Locator;
 
-    constructor (page:Page) {
+    constructor(page: Page) {
         this.page = page;
         this.modalWindow = this.page.locator('.ot-sdk-row')
         this.acceptCookiesButton = this.page.locator('#onetrust-accept-btn-handler');
