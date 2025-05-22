@@ -1,0 +1,9 @@
+{
+    "requiredInvalidEmailMessage": "Required field.",
+    "invalidFormatEmailMessage": "Enter a valid email address (example: email@email.com).",
+    "requiredInvalidPasswordMessage": "Required field.",
+    "invalidFormatPasswordMessage": "Enter a secure password: At least 8 characters long, containing uppercase and lowercase letters and numbers.",
+    "requiredInvalidNameMessage": "Required field.",
+    "requiredInvalidSurnameMessage": "Required field."
+
+}
