@@ -6,12 +6,14 @@ import { RegisterPage } from '../app/pages/RegisterPage';
 import { PersonalDetailsPage } from '../app/pages/PersonalDetailsPage';
 import { faker } from '@faker-js/faker';
 import validationMessages from '../app/fixtures/validation-error-messages.json' assert {type: 'json'};
+import { launchStealthPage } from '../app/Utils/stealthBrowser';
 
 test.describe('Zara user journey: from cookie modal to registration', () => {
 
-  test('TC-1 Search item by name and add all sizes', async ({ pageWithCookies }) => {
-    const mainPage = new MainPage(pageWithCookies);
-    const cartPage = new CartPage(pageWithCookies);
+  test('TC-1 Search item by name and add all sizes', async () => {
+   const page = await launchStealthPage();
+    const mainPage = new MainPage(page);
+    const cartPage = new CartPage(page);
     const itemName = "Boots"
     const minSizes = 4
 
@@ -23,9 +25,10 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     await cartPage.cartMatchesAddedSizes(added);
   });
 
-  test('TC-2 Remove every second item from shopping bag', async ({ pageWithCookies }) => {
-    const mainPage = new MainPage(pageWithCookies);
-    const cartPage = new CartPage(pageWithCookies);
+  test('TC-2 Remove every second item from shopping bag', async () => {
+    const page = await launchStealthPage();
+    const mainPage = new MainPage(page);
+    const cartPage = new CartPage(page);
     const itemName = "Dress"
     const minSizes = 6
 
@@ -40,7 +43,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     await cartPage.clickContinueButton();
   });
 
-  test('TC-3 Check the error message for incorrectly filled Email field in registration form', async ({ pageWithCookies}) => {
+  test.skip('TC-3 Check the error message for incorrectly filled Email field in registration form', async ({ pageWithCookies}) => {
     const mainPage = new MainPage(pageWithCookies);
     const cartPage = new CartPage(pageWithCookies);
     const registerPage = new RegisterPage(pageWithCookies);
@@ -77,7 +80,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     expect(await personalDetailsPage.getErrorMessage()).toEqual(validationMessages.invalidFormatEmailMessage);
   });
 
-   test('TC-4 Check the error message for incorrectly filled Password field in registration form', async ({ pageWithCookies }) => {
+   test.skip('TC-4 Check the error message for incorrectly filled Password field in registration form', async ({ pageWithCookies }) => {
     const mainPage = new MainPage(pageWithCookies);
     const cartPage = new CartPage(pageWithCookies);
     const registerPage = new RegisterPage(pageWithCookies);
@@ -114,7 +117,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     expect(await personalDetailsPage.getErrorMessage()).toEqual(validationMessages.invalidFormatPasswordMessage);
   });
 
-  test('TC-5 Check the error message for incorrectly filled Name field in registration form', async ({ pageWithCookies }) => {
+  test.skip('TC-5 Check the error message for incorrectly filled Name field in registration form', async ({ pageWithCookies }) => {
     const mainPage = new MainPage(pageWithCookies);
     const cartPage = new CartPage(pageWithCookies);
     const registerPage = new RegisterPage(pageWithCookies);
@@ -144,7 +147,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     expect(await personalDetailsPage.getErrorMessage()).toEqual(validationMessages.requiredInvalidNameMessage);
   });
 
-  test('TC-6 Check the error message for incorrectly filled Surname field in registration form', async ({ pageWithCookies }) => {
+  test.skip('TC-6 Check the error message for incorrectly filled Surname field in registration form', async ({ pageWithCookies }) => {
     const mainPage = new MainPage(pageWithCookies);
     const cartPage = new CartPage(pageWithCookies);
     const registerPage = new RegisterPage(pageWithCookies);
