@@ -2,21 +2,23 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-
-
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
+  workers: 1,
+  reporter: [
+    ['html', { outputFolder: 'playwright-report', open: 'never' }]
+  ],
 
   use: {
     baseURL: 'https://www.zara.com/',
-    headless: false,
     viewport: { width: 1280, height: 720 },
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 13_0_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
+    headless: false,
+    trace: 'on',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',  
   },
-
   projects: [
     {
       name: 'chromium',
@@ -33,7 +35,6 @@ export default defineConfig({
     //   use: { ...devices['Desktop Safari'] },
     // },
 
-    
     // {
     //   name: 'Mobile Chrome',
     //   use: { ...devices['Pixel 5'] },
@@ -43,7 +44,6 @@ export default defineConfig({
     //   use: { ...devices['iPhone 12'] },
     // },
 
-   
     // {
     //   name: 'Microsoft Edge',
     //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
