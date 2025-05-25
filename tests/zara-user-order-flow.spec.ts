@@ -22,9 +22,6 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
   test.beforeEach(async () => {
     browser = await chromium.launch({ headless: true });
     context = await browser.newContext({
-      locale: 'uk-UA',
-      geolocation: { latitude: 50.4501, longitude: 30.5234 },
-      permissions: ['geolocation'],
       viewport: { width: 1280, height: 720 },
     });
     page = await context.newPage();
@@ -134,7 +131,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
 
     await page.goto('ua/en');
     await cookieConsentPage.goToStore();
-    
+
     await basePage.clickSearchButton();
     await mainPage.fillSearchField(itemName);
 
@@ -228,4 +225,4 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
 
     expect(await personalDetailsPage.getErrorMessage()).toEqual(validationMessages.requiredInvalidSurnameMessage);
   });
-});;
+});
