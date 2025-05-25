@@ -41,7 +41,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const minSizes = 4
 
     await page.goto('https://www.zara.com/ua/en/');
-    await cookieConsentPage.acceptCookies();
+    // await cookieConsentPage.acceptCookies();
     await cookieConsentPage.goToStore();
 
     await mainPage.clickSearchButton();
@@ -59,7 +59,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const minSizes = 6
 
     await page.goto('https://www.zara.com/ua/en/');
-    await cookieConsentPage.acceptCookies();
+    // await cookieConsentPage.acceptCookies();
     await cookieConsentPage.goToStore();
 
     await mainPage.clickSearchButton();
@@ -92,7 +92,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     console.log(password);
 
     await page.goto('https://www.zara.com/ua/en/');
-    await cookieConsentPage.acceptCookies();
+    // await cookieConsentPage.acceptCookies();
     await cookieConsentPage.goToStore();
 
     await mainPage.clickSearchButton();
@@ -135,7 +135,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
 
     await page.goto('https://www.zara.com/ua/en/');
     await cookieConsentPage.acceptCookies();
-    await cookieConsentPage.goToStore();
+    // await cookieConsentPage.goToStore();
 
     await mainPage.clickSearchButton();
     await mainPage.fillSearchField(itemName);
@@ -175,7 +175,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const lastName = faker.person.lastName();
 
     await page.goto('https://www.zara.com/ua/en/');
-    await cookieConsentPage.acceptCookies();
+    // await cookieConsentPage.acceptCookies();
     await cookieConsentPage.goToStore();
 
     await mainPage.clickSearchButton();
@@ -214,7 +214,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const name = faker.person.firstName();
 
     await page.goto('https://www.zara.com/ua/en/');
-    await cookieConsentPage.acceptCookies();
+    // await cookieConsentPage.acceptCookies();
     await cookieConsentPage.goToStore();
 
     await mainPage.clickSearchButton();
