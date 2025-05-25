@@ -10,6 +10,7 @@ import { chromium } from 'playwright-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import { CookieConsentPage } from '../app/pages/CookieConsentPage';
 import { BasePage } from '../app/pages/BasePage';
+import { generateStrongPassword } from '../app/helper/generateStrongPassword';
 
 chromium.use(StealthPlugin());
 
@@ -88,7 +89,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const invalidEmail1 = faker.internet.email().split('@')[0] + 'gmail.com';
     const firstName = faker.person.firstName();
     const lastName = faker.person.lastName();
-     const password = 'XrEM6N.CAR7K-Yu';
+    const password = generateStrongPassword();
 
     await page.goto('ua/en');
     await cookieConsentPage.goToStore();
@@ -169,7 +170,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const minSizes = 4
     const email = faker.internet.email();
     const lastName = faker.person.lastName();
-    const password = 'XrEM6N.CAR7K-Yu';
+    const password = generateStrongPassword();
 
     await page.goto('ua/en');
     await cookieConsentPage.goToStore();
@@ -204,8 +205,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const minSizes = 4
     const email = faker.internet.email();
     const name = faker.person.firstName();
-    const password = 'XrEM6N.CAR7K-Yu';
-
+    const password = generateStrongPassword();
 
     await page.goto('ua/en');
     await cookieConsentPage.goToStore();
