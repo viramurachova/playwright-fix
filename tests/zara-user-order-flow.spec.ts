@@ -88,11 +88,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const invalidEmail1 = faker.internet.email().split('@')[0] + 'gmail.com';
     const firstName = faker.person.firstName();
     const lastName = faker.person.lastName();
-    const password = faker.internet.password({
-      length: 15,
-      memorable: false,
-      pattern: /[A-Za-z0-9!@#$%^&*()_+.\-]/,
-    });
+     const password = 'XrEM6N.CAR7K-Yu';
 
     await page.goto('ua/en');
     await cookieConsentPage.goToStore();
@@ -173,11 +169,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const minSizes = 4
     const email = faker.internet.email();
     const lastName = faker.person.lastName();
-    const password = faker.internet.password({
-      length: 15,
-      memorable: false,
-      pattern: /[A-Za-z0-9!@#$%^&*()_+.\-]/,
-    });
+    const password = 'XrEM6N.CAR7K-Yu';
 
     await page.goto('ua/en');
     await cookieConsentPage.goToStore();
@@ -212,11 +204,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const minSizes = 4
     const email = faker.internet.email();
     const name = faker.person.firstName();
-    const password = faker.internet.password({
-      length: 15,
-      memorable: false,
-      pattern: /[A-Za-z0-9!@#$%^&*()_+.\-]/,
-    });
+    const password = 'XrEM6N.CAR7K-Yu';
 
 
     await page.goto('ua/en');
