@@ -132,8 +132,8 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const invalidPassword = faker.string.alphanumeric(5);
 
     await page.goto('ua/en');
-    await cookieConsentPage.acceptCookies();
-
+    await cookieConsentPage.goToStore();
+    
     await basePage.clickSearchButton();
     await mainPage.fillSearchField(itemName);
 
