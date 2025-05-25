@@ -22,7 +22,7 @@ export class MainPage {
     this.searchResult = this.page.locator('[data-qa-qualifier="media-image"]');
     this.shoppingBagButton = this.page.locator('[data-qa-id="layout-header-go-to-cart"]');
     this.sizeSelector = this.page.locator('[data-qa-action="product-grid-open-size-selector"]')
-    this.sizeInStockLocator = this.page.locator('[data-qa-action="size-in-stock"]')
+    this.sizeInStockLocator = this.page.locator('[data-qa-action]:is([data-qa-action="size-in-stock"], [data-qa-action="size-low-on-stock"])')
     this.filtersLocator = this.page.locator('#filters-text')
     this.imageLocator = this.page.locator('img[data-qa-qualifier="media-image"]');
     this.productName = this.page.locator('.product-grid-product-info__main-info');

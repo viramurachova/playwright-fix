@@ -49,4 +49,5 @@ coverage/
 # Auth and cookies files
 zara-auth.json
 zara-cookies.json
+stealth-test.js
 

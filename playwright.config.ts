@@ -6,18 +6,16 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: 1,
-  reporter: [
-    ['html', { outputFolder: 'playwright-report', open: 'never' }]
-  ],
+  reporter: 'html',
 
   use: {
     baseURL: 'https://www.zara.com/',
     viewport: { width: 1280, height: 720 },
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 13_0_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
     headless: true,
-    trace: 'on',
-    screenshot: 'only-on-failure',
-    video: 'retain-on-failure',  
+    screenshot: 'only-on-failure',  
+    video: 'retain-on-failure',    
+    trace: 'retain-on-failure',
   },
   projects: [
     {
