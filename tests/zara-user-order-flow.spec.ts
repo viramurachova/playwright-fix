@@ -9,6 +9,7 @@ import { Page, Browser, BrowserContext } from '@playwright/test';
 import { chromium } from 'playwright-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import { CookieConsentPage } from '../app/pages/CookieConsentPage';
+import { BasePage } from '../app/pages/BasePage';
 
 chromium.use(StealthPlugin());
 
@@ -37,17 +38,19 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const cookieConsentPage = new CookieConsentPage(page);
     const mainPage = new MainPage(page);
     const cartPage = new CartPage(page);
+    const basePage = new BasePage(page);
     const itemName = "Boots"
     const minSizes = 4
 
-    await page.goto('https://www.zara.com/ua/en/');
-    // await cookieConsentPage.acceptCookies();
+    await page.goto('ua/en');
     await cookieConsentPage.goToStore();
 
-    await mainPage.clickSearchButton();
+    await basePage.clickSearchButton();
     await mainPage.fillSearchField(itemName);
+
     const added = await mainPage.addFirstItemWithEnoughSizes(minSizes);
-    await mainPage.clickShoppingBagButton();
+
+    await basePage.clickShoppingBagButton();
     await cartPage.cartMatchesAddedSizes(added);
   });
 
@@ -55,18 +58,19 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const cookieConsentPage = new CookieConsentPage(page);
     const mainPage = new MainPage(page);
     const cartPage = new CartPage(page);
+    const basePage = new BasePage(page);
     const itemName = "Dress"
     const minSizes = 6
 
-    await page.goto('https://www.zara.com/ua/en/');
-    // await cookieConsentPage.acceptCookies();
+    await page.goto('ua/en');
     await cookieConsentPage.goToStore();
 
-    await mainPage.clickSearchButton();
+    await basePage.clickSearchButton();
     await mainPage.fillSearchField(itemName);
 
     const added = await mainPage.addFirstItemWithEnoughSizes(minSizes);
-    await mainPage.clickShoppingBagButton();
+
+    await basePage.clickShoppingBagButton();
     await cartPage.cartMatchesAddedSizes(added);
     await cartPage.removeEverySecondItem();
     await cartPage.clickContinueButton();
@@ -76,6 +80,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const cookieConsentPage = new CookieConsentPage(page);
     const mainPage = new MainPage(page);
     const cartPage = new CartPage(page);
+    const basePage = new BasePage(page);
     const registerPage = new RegisterPage(page);
     const personalDetailsPage = new PersonalDetailsPage(page);
     const itemName = "Jeans"
@@ -89,17 +94,15 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
       pattern: /[A-Za-z0-9!@#$%^&*()_+.\-]/,
     });
 
-    console.log(password);
-
-    await page.goto('https://www.zara.com/ua/en/');
-    // await cookieConsentPage.acceptCookies();
+    await page.goto('ua/en');
     await cookieConsentPage.goToStore();
 
-    await mainPage.clickSearchButton();
+    await basePage.clickSearchButton();
     await mainPage.fillSearchField(itemName);
 
     const added = await mainPage.addFirstItemWithEnoughSizes(minSizes);
-    await mainPage.clickShoppingBagButton();
+
+    await basePage.clickShoppingBagButton();
     await cartPage.cartMatchesAddedSizes(added);
     await cartPage.removeEverySecondItem();
     await cartPage.clickContinueButton();
@@ -110,13 +113,11 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     await personalDetailsPage.checkPrivacyCheckbox();
     await personalDetailsPage.clickCreateAccountButton();
 
-    console.log(await personalDetailsPage.getErrorMessage());
     expect(await personalDetailsPage.getErrorMessage()).toEqual(validationMessages.requiredInvalidEmailMessage);
 
     await personalDetailsPage.emailField.fill(invalidEmail1);
     await personalDetailsPage.clickCreateAccountButton();
 
-    console.log(await personalDetailsPage.getErrorMessage());
     expect(await personalDetailsPage.getErrorMessage()).toEqual(validationMessages.invalidFormatEmailMessage);
   });
 
@@ -124,6 +125,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const cookieConsentPage = new CookieConsentPage(page);
     const mainPage = new MainPage(page);
     const cartPage = new CartPage(page);
+    const basePage = new BasePage(page);
     const registerPage = new RegisterPage(page);
     const personalDetailsPage = new PersonalDetailsPage(page);
     const itemName = "Shirt"
@@ -133,15 +135,15 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const lastName = faker.person.lastName();
     const invalidPassword = faker.string.alphanumeric(5);
 
-    await page.goto('https://www.zara.com/ua/en/');
+    await page.goto('ua/en');
     await cookieConsentPage.acceptCookies();
-    // await cookieConsentPage.goToStore();
 
-    await mainPage.clickSearchButton();
+    await basePage.clickSearchButton();
     await mainPage.fillSearchField(itemName);
 
     const added = await mainPage.addFirstItemWithEnoughSizes(minSizes);
-    await mainPage.clickShoppingBagButton();
+
+    await basePage.clickShoppingBagButton();
     await cartPage.cartMatchesAddedSizes(added);
     await cartPage.removeEverySecondItem();
     await cartPage.clickContinueButton();
@@ -152,13 +154,11 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     await personalDetailsPage.checkPrivacyCheckbox();
     await personalDetailsPage.clickCreateAccountButton();
 
-    console.log(await personalDetailsPage.getErrorMessage());
     expect(await personalDetailsPage.getErrorMessage()).toEqual(validationMessages.requiredInvalidPasswordMessage);
 
     await personalDetailsPage.passwordField.fill(invalidPassword);
     await personalDetailsPage.clickCreateAccountButton();
 
-    console.log(await personalDetailsPage.getErrorMessage());
     expect(await personalDetailsPage.getErrorMessage()).toEqual(validationMessages.invalidFormatPasswordMessage);
   });
 
@@ -166,23 +166,28 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const cookieConsentPage = new CookieConsentPage(page);
     const mainPage = new MainPage(page);
     const cartPage = new CartPage(page);
+    const basePage = new BasePage(page);
     const registerPage = new RegisterPage(page);
     const personalDetailsPage = new PersonalDetailsPage(page);
     const itemName = "Top"
     const minSizes = 4
     const email = faker.internet.email();
-    const password = faker.string.alpha({ length: 4, casing: 'mixed' }) + faker.string.numeric(4);
     const lastName = faker.person.lastName();
+    const password = faker.internet.password({
+      length: 15,
+      memorable: false,
+      pattern: /[A-Za-z0-9!@#$%^&*()_+.\-]/,
+    });
 
-    await page.goto('https://www.zara.com/ua/en/');
-    // await cookieConsentPage.acceptCookies();
+    await page.goto('ua/en');
     await cookieConsentPage.goToStore();
 
-    await mainPage.clickSearchButton();
+    await basePage.clickSearchButton();
     await mainPage.fillSearchField(itemName);
 
     const added = await mainPage.addFirstItemWithEnoughSizes(minSizes);
-    await mainPage.clickShoppingBagButton();
+
+    await basePage.clickShoppingBagButton();
     await cartPage.cartMatchesAddedSizes(added);
     await cartPage.removeEverySecondItem();
     await cartPage.clickContinueButton();
@@ -193,7 +198,6 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     await personalDetailsPage.checkPrivacyCheckbox();
     await personalDetailsPage.clickCreateAccountButton();
 
-    console.log(await personalDetailsPage.getErrorMessage());
     expect(await personalDetailsPage.getErrorMessage()).toEqual(validationMessages.requiredInvalidNameMessage);
   });
 
@@ -201,27 +205,29 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const cookieConsentPage = new CookieConsentPage(page);
     const mainPage = new MainPage(page);
     const cartPage = new CartPage(page);
+    const basePage = new BasePage(page);
     const registerPage = new RegisterPage(page);
     const personalDetailsPage = new PersonalDetailsPage(page);
     const itemName = "Sandals"
     const minSizes = 4
     const email = faker.internet.email();
+    const name = faker.person.firstName();
     const password = faker.internet.password({
       length: 15,
       memorable: false,
       pattern: /[A-Za-z0-9!@#$%^&*()_+.\-]/,
     });
-    const name = faker.person.firstName();
 
-    await page.goto('https://www.zara.com/ua/en/');
-    // await cookieConsentPage.acceptCookies();
+
+    await page.goto('ua/en');
     await cookieConsentPage.goToStore();
 
-    await mainPage.clickSearchButton();
+    await basePage.clickSearchButton();
     await mainPage.fillSearchField(itemName);
 
     const added = await mainPage.addFirstItemWithEnoughSizes(minSizes);
-    await mainPage.clickShoppingBagButton();
+
+    await basePage.clickShoppingBagButton();
     await cartPage.cartMatchesAddedSizes(added);
     await cartPage.removeEverySecondItem();
     await cartPage.clickContinueButton();
@@ -232,7 +238,6 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     await personalDetailsPage.checkPrivacyCheckbox();
     await personalDetailsPage.clickCreateAccountButton();
 
-    console.log(await personalDetailsPage.getErrorMessage());
     expect(await personalDetailsPage.getErrorMessage()).toEqual(validationMessages.requiredInvalidSurnameMessage);
   });
 });;
