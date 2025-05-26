@@ -22,7 +22,7 @@ export class MainPage {
     this.filtersLocator = this.page.locator('#filters-text')
     this.imageLocator = this.page.locator('img[data-qa-qualifier="media-image"]');
     this.productName = this.page.locator('.product-grid-product-info__main-info');
-    this.closeButton = this.page.locator('[aria-label="close"]');
+    this.closeButton = this.page.locator('.zds-drawer-close-button');
     this.logInLink = this.page.locator('[data-qa-id="layout-header-user-logon"]')
     this.continueButton = page.locator('[data-qa-id="shop-continue"]');
   }
