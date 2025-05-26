@@ -20,6 +20,7 @@ export const test = base.extend<PageFixtures>({
     basePageWithCookies: async ({ page }, use) => {
         const cookieConsentPage = new CookieConsentPage(page);
         await page.goto('ua/en');
+        await cookieConsentPage.acceptCookies();
         await cookieConsentPage.goToStore();
         const basePage = new BasePage(page);
         await use(basePage);
