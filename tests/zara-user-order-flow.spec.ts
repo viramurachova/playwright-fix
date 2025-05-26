@@ -1,38 +1,17 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../app/fixtures/stealth-fixtures';
 import { MainPage } from '../app/pages/MainPage';
 import { CartPage } from '../app/pages/CartPage';
 import { RegisterPage } from '../app/pages/RegisterPage';
 import { PersonalDetailsPage } from '../app/pages/PersonalDetailsPage';
 import { faker } from '@faker-js/faker';
 import validationMessages from '../app/fixtures/validation-error-messages.json' assert {type: 'json'};
-import { Page, Browser, BrowserContext } from '@playwright/test';
-import { chromium } from 'playwright-extra';
-import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import { CookieConsentPage } from '../app/pages/CookieConsentPage';
 import { BasePage } from '../app/pages/BasePage';
 import { generateStrongPassword } from '../app/helper/generateStrongPassword';
 
-chromium.use(StealthPlugin());
 
 test.describe('Zara user journey: from cookie modal to registration', () => {
-  let browser: Browser;
-  let context: BrowserContext;
-  let page: Page;
-
-  test.beforeEach(async () => {
-    browser = await chromium.launch({ headless: true });
-    context = await browser.newContext({
-      viewport: { width: 1280, height: 720 },
-    });
-    page = await context.newPage();
-  });
-
-  test.afterEach(async () => {
-    await context.close();
-    await browser.close();
-  });
-
-  test('TC-1 Search item by name and add all sizes', async () => {
+  test('TC-1 Search item by name and add all sizes', async ({page}) => {
     const cookieConsentPage = new CookieConsentPage(page);
     const mainPage = new MainPage(page);
     const cartPage = new CartPage(page);
@@ -52,7 +31,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     await cartPage.cartMatchesAddedSizes(added);
   });
 
-  test('TC-2 Remove every second item from shopping bag', async () => {
+  test('TC-2 Remove every second item from shopping bag', async ({page}) => {
     const cookieConsentPage = new CookieConsentPage(page);
     const mainPage = new MainPage(page);
     const cartPage = new CartPage(page);
@@ -74,7 +53,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     await cartPage.clickContinueButton();
   });
 
-  test('TC-3 Check the error message for incorrectly filled Email field in registration form', async () => {
+  test('TC-3 Check the error message for incorrectly filled Email field in registration form', async ({page}) => {
     const cookieConsentPage = new CookieConsentPage(page);
     const mainPage = new MainPage(page);
     const cartPage = new CartPage(page);
@@ -115,7 +94,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     expect(await personalDetailsPage.getErrorMessage()).toEqual(validationMessages.invalidFormatEmailMessage);
   });
 
-  test('TC-4 Check the error message for incorrectly filled Password field in registration form', async () => {
+  test('TC-4 Check the error message for incorrectly filled Password field in registration form', async ({page}) => {
     const cookieConsentPage = new CookieConsentPage(page);
     const mainPage = new MainPage(page);
     const cartPage = new CartPage(page);
@@ -156,7 +135,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     expect(await personalDetailsPage.getErrorMessage()).toEqual(validationMessages.invalidFormatPasswordMessage);
   });
 
-  test('TC-5 Check the error message for incorrectly filled Name field in registration form', async () => {
+  test('TC-5 Check the error message for incorrectly filled Name field in registration form', async ({page}) => {
     const cookieConsentPage = new CookieConsentPage(page);
     const mainPage = new MainPage(page);
     const cartPage = new CartPage(page);
@@ -191,7 +170,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     expect(await personalDetailsPage.getErrorMessage()).toEqual(validationMessages.requiredInvalidNameMessage);
   });
 
-  test('TC-6 Check the error message for incorrectly filled Surname field in registration form', async () => {
+  test('TC-6 Check the error message for incorrectly filled Surname field in registration form', async ({page}) => {
     const cookieConsentPage = new CookieConsentPage(page);
     const mainPage = new MainPage(page);
     const cartPage = new CartPage(page);
