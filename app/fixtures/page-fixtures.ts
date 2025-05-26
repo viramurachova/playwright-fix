@@ -7,22 +7,28 @@ import { PersonalDetailsPage } from '../pages/PersonalDetailsPage';
 import { BasePage } from '../pages/BasePage';
 
 type PageFixtures = {
-    mainPageWithCookies: MainPage;
+    basePageWithCookies: BasePage;
     cookieConsentPage: CookieConsentPage;
     cartPage: CartPage;
     registerPage: RegisterPage;
     personalDetailsPage: PersonalDetailsPage;
-    basePage: BasePage;
+    mainPage: MainPage;
+    basePage: BasePage
 };
 
 export const test = base.extend<PageFixtures>({
-    mainPageWithCookies: async ({ page }, use) => {
+    basePageWithCookies: async ({ page }, use) => {
         const cookieConsentPage = new CookieConsentPage(page);
         await page.goto('ua/en');
         await cookieConsentPage.goToStore();
-        const mainPage = new MainPage(page);
-        await use(mainPage);
+        const basePage = new BasePage(page);
+        await use(basePage);
     },
+
+    basePage: async ({ page }, use) => {
+        const basePage = new BasePage(page);
+        await use(basePage);
+      },
 
     cookieConsentPage: async ({ page }, use) => {
         await use(new CookieConsentPage(page));
@@ -32,8 +38,8 @@ export const test = base.extend<PageFixtures>({
         await use(new CartPage(page));
     },
 
-    basePage: async ({ page }, use) => {
-        await use(new BasePage(page));
+    mainPage: async ({ page }, use) => {
+        await use(new MainPage(page));
     },
 
     registerPage: async ({ page }, use) => {

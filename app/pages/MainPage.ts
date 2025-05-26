@@ -17,7 +17,7 @@ export class MainPage {
     this.page = page;
     this.searchInputField = this.page.locator('[id="search-home-form-combo-input"]');
     this.searchResult = this.page.locator('[data-qa-qualifier="media-image"]');
-    this.sizeSelector = this.page.locator('[data-qa-action="product-grid-open-size-selector"]')
+    this.sizeSelector = this.page.locator('.product-add-to-cart__button-icon')
     this.sizeInStockLocator = this.page.locator('[data-qa-action]:is([data-qa-action="size-in-stock"], [data-qa-action="size-low-on-stock"])')
     this.filtersLocator = this.page.locator('#filters-text')
     this.imageLocator = this.page.locator('img[data-qa-qualifier="media-image"]');
