@@ -40,6 +40,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const firstName = faker.person.firstName();
     const lastName = faker.person.lastName();
     const password = generateStrongPassword();
+    const phoneNumber = '2' + faker.string.numeric(9);
 
     await basePage.clickSearchButton();
     await mainPageWithCookies.fillSearchField(itemName);
@@ -54,6 +55,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     await personalDetailsPage.nameField.fill(firstName);
     await personalDetailsPage.surnameField.fill(lastName);
     await personalDetailsPage.passwordField.fill(password);
+    await personalDetailsPage.phoneNumberInputField.fill(phoneNumber);
     await personalDetailsPage.checkPrivacyCheckbox();
     await personalDetailsPage.clickCreateAccountButton();
 
@@ -72,6 +74,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const firstName = faker.person.firstName();
     const lastName = faker.person.lastName();
     const invalidPassword = faker.string.alphanumeric(5);
+    const phoneNumber = '2' + faker.string.numeric(9);
 
     await basePage.clickSearchButton();
     await mainPageWithCookies.fillSearchField(itemName);
@@ -86,6 +89,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     await personalDetailsPage.nameField.fill(firstName);
     await personalDetailsPage.surnameField.fill(lastName);
     await personalDetailsPage.emailField.fill(email);
+    await personalDetailsPage.phoneNumberInputField.fill(phoneNumber);
     await personalDetailsPage.checkPrivacyCheckbox();
     await personalDetailsPage.clickCreateAccountButton();
 
@@ -103,6 +107,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const email = faker.internet.email();
     const lastName = faker.person.lastName();
     const password = generateStrongPassword();
+    const phoneNumber = '2' + faker.string.numeric(9);
 
     await basePage.clickSearchButton();
     await mainPageWithCookies.fillSearchField(itemName);
@@ -117,6 +122,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     await personalDetailsPage.emailField.fill(email);
     await personalDetailsPage.passwordField.fill(password);
     await personalDetailsPage.surnameField.fill(lastName);
+    await personalDetailsPage.phoneNumberInputField.fill(phoneNumber);
     await personalDetailsPage.checkPrivacyCheckbox();
     await personalDetailsPage.clickCreateAccountButton();
 
@@ -129,6 +135,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     const email = faker.internet.email();
     const name = faker.person.firstName();
     const password = generateStrongPassword();
+    const phoneNumber = '2' + faker.string.numeric(9);
 
     await basePage.clickSearchButton();
     await mainPageWithCookies.fillSearchField(itemName);
@@ -143,6 +150,7 @@ test.describe('Zara user journey: from cookie modal to registration', () => {
     await personalDetailsPage.emailField.fill(email);
     await personalDetailsPage.passwordField.fill(password);
     await personalDetailsPage.nameField.fill(name);
+    await personalDetailsPage.phoneNumberInputField.fill(phoneNumber);
     await personalDetailsPage.checkPrivacyCheckbox();
     await personalDetailsPage.clickCreateAccountButton();
 

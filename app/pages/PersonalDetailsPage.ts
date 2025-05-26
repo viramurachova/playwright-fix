@@ -26,6 +26,7 @@ export class PersonalDetailsPage {
         this.createAccountButton = this.page.locator('[data-qa-action="sign-up-submit"]');
         this.inputNameText = this.page.locator('.screen-reader-text');
         this.errorMessage = this.page.locator('.form-input-error');
+        this.phoneNumberInputField = this.page.locator('[data-qa-input-qualifier="phone.number"]');
     }
 
     async checkPrivacyCheckbox() {
