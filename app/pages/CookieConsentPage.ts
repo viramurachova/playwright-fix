@@ -8,7 +8,7 @@ export class CookieConsentPage {
   constructor(page: Page) {
     this.page = page;
     this.acceptCookiesButton = this.page.locator('#onetrust-accept-btn-handler');
-    this.goToStoreButton = this.page.locator('[data-qa-action="go-to-store"]');
+    this.goToStoreButton = this.page.locator('[data-qa-action="stay-in-store"]');
   }
 
   async acceptCookies(): Promise<void> {

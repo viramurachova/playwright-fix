@@ -18,8 +18,8 @@ type PageFixtures = {
 export const test = base.extend<PageFixtures>({
     mainPageWithCookies: async ({ page }, use) => {
         const cookieConsentPage = new CookieConsentPage(page);
-        await page.goto('/');
-       // await cookieConsentPage.acceptCookies();
+        await page.goto('ua/en');
+        await cookieConsentPage.acceptCookies();
         await cookieConsentPage.goToStore();
         const mainPage = new MainPage(page);
         await use(mainPage);
