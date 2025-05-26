@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 export class MainPage {
   page: Page;
@@ -67,8 +67,7 @@ export class MainPage {
       await this.sizeSelector.nth(i).waitFor({ state: 'visible', timeout: 5000 });
       await this.sizeSelector.nth(i).click();
 
-      await this.sizeInStockLocator.first().waitFor({ state: 'visible', timeout: 5000 });
-
+      await this.sizeInStockLocator.first().waitFor({ timeout: 5000 });
       const count = await this.sizeInStockLocator.count();
 
       if (count >= minSizes) {
